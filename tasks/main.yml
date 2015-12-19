@@ -1,0 +1,15 @@
+---
+# In ideal world I would have a deployment server, that has the same
+# configuration as production servers and so on.
+# Anyways I decided to compile a python interpreter directly on the webserwer.
+#
+# This is probably a slight abuse of ansible rolebooks
+- name:
+  set_fact:
+    python_compiled_flag: "{{python.location}}/.completed"
+- name: test for completion
+  command: test -e {{python_compiled_flag}}
+  register: out
+  ignore_errors: True
+- include: _do_compile_python.yaml
+  when: out.rc == 1

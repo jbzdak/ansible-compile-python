@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Jacek Bzdak
+  description: |
+    Compiles a python interpreter from source, Python is the only thing it
+    downloads, rest is downloaded from debian repositories.
+
+    Tested for python 3.5
+  license: BSD
+  min_ansible_version: 1.9
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+dependencies: []
+  

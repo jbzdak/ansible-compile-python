@@ -1,0 +1,36 @@
+---
+# See compile_python.yaml
+- set_fact:
+    python_work_folder: /tmp/python/compile
+- name: delete target folder
+  file: name={{python.location}} state=absent
+- name: delete work forlder
+  file: name={{python_work_folder}} state=absent
+- name: install dependencies
+# Recommended packages for python3.4 include texlive (more than 1GB download :() so explicitly ignore them
+  apt: name={{item}} state=build-dep install_recommends=no
+  with_items: "{{python.compilation.build_dep}}"
+- name: install dependencies
+  apt: name={{item}} state=present install_recommends=no
+  with_items: "{{python.compilation.dependencies}}"
+- name: create work folder
+  file: name={{python_work_folder}} state=directory
+- get_url: dest={{python_work_folder}} url={{python.download.url}}
+           sha256sum={{python.download.sha256sum}} validate_certs=yes
+- name: unpack
+  command: bash -c "cd {{python_work_folder}} && tar -xaf *tar*"
+- set_fact:
+    python_src_root: "{{python_work_folder}}/Python-{{python.version}}"
+- name: configure
+  command: bash -c "cd {{python_src_root}} && ./configure --prefix {{python.location}}"
+- name: make
+  command: bash -c "cd {{python_src_root}} && make"
+- name: make test
+  command: bash -c "cd {{python_src_root}} && make test"
+- name: make install
+  command: bash -c "cd {{python_src_root}} && make install"
+- name: make completed flag
+  file: name={{python_compiled_flag}} state=touch
+- name: delete work forlder
+  file: name={{python_work_folder}} state=absent
+
