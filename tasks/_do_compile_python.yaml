@@ -27,6 +27,7 @@
   command: bash -c "cd {{python_src_root}} && make"
 - name: make test
   command: bash -c "cd {{python_src_root}} && make test"
+  when: python.do_tests
 - name: make install
   command: bash -c "cd {{python_src_root}} && make install"
 - name: make completed flag

@@ -1,2 +1,24 @@
 ---
 # vars file for compile-python
+python35:
+  do_tests: false
+  location: /usr/local/python/3.5.0
+  version: 3.5.0
+  compilation:
+    build_dep:
+     - python3.4
+    dependencies: []
+  download:
+    url: "https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz"
+    sha256sum: "d6d7aa1634a5eeeca6ed4fca266982a04f84bd8f3945a9179e20b24ad2e2be91"
+python27:
+  do_tests: false
+  location: /usr/local/python/2.7.11
+  version: 2.7.11
+  compilation:
+    build_dep:
+     - python2.7
+    dependencies: []
+  download:
+    url: "https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tar.xz"
+    sha256sum: "962b4c45af50124ea61f11a30deb4342fc0bc21126790fa1d7f6c79809413f46"
