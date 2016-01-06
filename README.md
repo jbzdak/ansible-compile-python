@@ -4,7 +4,8 @@ Role Name
 Compiles a python interpreter from source, Python is the only thing it
 downloads, rest is downloaded from debian repositories.
 
-Tested for python 3.5 and debian Jessies. Should work for another combinations. 
+Tested for python 2.7.11, 3.5 and debian Jessies.
+Should work for another combinations.
 
 We also (optionally) run make test before finishing, to check any unforseen issues.
 Tests are optionall since 25.12.2015 when ``test_ssl`` failed because
@@ -13,7 +14,7 @@ botched sertificate on ``svn.python.org``.
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+All requirements are installed using apt.
 
 Role Variables
 --------------
@@ -67,7 +68,7 @@ variables:
 Playbook:
 
  - role: compile-python
-    python: "{{python27}}"
+    python: "{{python35}}"
 
     
 License
