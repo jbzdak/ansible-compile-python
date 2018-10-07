@@ -8,11 +8,9 @@
   file: name={{python_work_folder}} state=absent
 - name: install dependencies
 # Recommended packages for python3.4 include texlive (more than 1GB download :() so explicitly ignore them
-  apt: name={{item}} state=build-dep install_recommends=no
-  with_items: "{{python.compilation.build_dep}}"
+  apt: name="{{python.compilation.build_dep}}" state=build-dep install_recommends=no
 - name: install dependencies
-  apt: name={{item}} state=present install_recommends=no
-  with_items: "{{python.compilation.dependencies}}"
+  apt: name="{{python.compilation.dependencies}}" state=present install_recommends=no
 - name: create work folder
   file: name={{python_work_folder}} state=directory
 - get_url: dest={{python_work_folder}} url={{python.download.url}}
